@@ -9,3 +9,4 @@ read c
 echo "First Number:$a"
 echo "Second Number:$b"
 echo "Third Number:$c"
+echo $(($a+$b*$c))
