@@ -9,16 +9,16 @@ read c
 echo "First Number:$a"
 echo "Second Number:$b"
 echo "Third Number:$c"
-result1= $(($a+$b*$c))
-result2= $(($a*$b+$c))
-result3= $(($c+$a/$b))
-result4= $(($a%$b+$c))
+result1=$(($a+($b*$c)))
+result2=$(($a*($b+$c)))
+result3=$(($c+($a/$b)))
+result4=$(($a%($b+$c)))
 echo $result1
 echo $result2
 echo $result3
 echo $result4
 declare -A test_var
-test_var[key1]=$result1
+test_var['key1']=$result1
 test_var['key2']=$result2
 test_var['key3']=$result3
 # add key/value pair using bash variables
@@ -39,4 +39,22 @@ echo "Original Numbers in array:"
 for (( i = 0; i <= 3; i++ ))
 do
       echo ${Array[$i]}
+done
+for (( i = 0; i <= 3; i++ ))
+do
+	for (( j = $i; j <= 3; j++ ))
+   	do
+      		if [ ${Array[$i]} -lt ${Array[$j]} ] 
+		then
+       			t=${Array[$i]}
+       			Array[$i]=${Array[$j]}
+       			Array[$j]=$t
+      		fi
+   	done
+done
+
+echo -e "\nSorted Numbers in Descending Order:"
+for (( i=0; i <= 3; i++ ))
+do
+  	echo ${Array[$i]}
 done
